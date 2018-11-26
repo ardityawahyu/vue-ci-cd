@@ -1,11 +1,17 @@
 version: 2
 
+var: &dockerused
+  docker: 
+    - image: circleci/node:10.13.0-stretch #host(for unofficial dokcer)/image:tag(version)
+  working_directory: ~/workspace/code #optional
+
 jobs:
   build:
-    instances: &dockerused
-      docker: 
-        - image: circleci/node:10.13.0-stretch #host(for unofficial dokcer)/image:tag(version)
-      working_directory: ~/workspace/code #optional
+    <<: *dockerused
+    # instances: &dockerused
+    #   docker: 
+    #     - image: circleci/node:10.13.0-stretch #host(for unofficial dokcer)/image:tag(version)
+    #   working_directory: ~/workspace/code #optional
     steps:
       - checkout
       - run:
