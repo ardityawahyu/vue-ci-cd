@@ -2,9 +2,10 @@ version: 2
 
 jobs:
   build:
-    docker:
-      - image: circleci/node:10.13.0-stretch #host(for unofficial dokcer)/image:tag(version)
-    working_directory: ~/workspace/code #optional
+    instances: &dockerused
+      docker: 
+        - image: circleci/node:10.13.0-stretch #host(for unofficial dokcer)/image:tag(version)
+      working_directory: ~/workspace/code #optional
     steps:
       - checkout
       - run:
@@ -13,3 +14,9 @@ jobs:
       - run:
           name: Build
           command: yarn build
+  test:
+    &dockerused
+    steps:
+      - run:
+          name: Testing
+          command: yarn test
