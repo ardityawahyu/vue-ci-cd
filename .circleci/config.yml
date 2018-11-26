@@ -15,7 +15,7 @@ jobs:
           name: Build
           command: yarn build
   test:
-    &dockerused
+    <<: *dockerused
     steps:
       - run:
           name: Testing
